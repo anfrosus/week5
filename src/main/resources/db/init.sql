@@ -1,0 +1,77 @@
+-- drop table if exists bookmark cascade;
+-- drop table if exists cart cascade;
+-- drop table if exists delivery cascade;
+-- drop table if exists order_detail cascade;
+-- drop table if exists orders cascade;
+-- drop table if exists product cascade;
+-- drop table if exists store cascade;
+-- drop table if exists users cascade;
+--
+-- create table bookmark
+-- (
+--     id         bigint auto_increment,
+--     product_id bigint,
+--     user_id    bigint,
+--     primary key (id)
+-- );
+-- create table cart
+-- (
+--     id               bigint auto_increment,
+--     product_id       bigint,
+--     product_quantity bigint not null,
+--     user_id          bigint,
+--     primary key (id)
+-- );
+-- create table delivery
+-- (
+--     id                   bigint auto_increment,
+--     user_id              bigint not null,
+--     delivery_address     varchar(255),
+--     delivery_name        varchar(255),
+--     delivery_postal_code varchar(255),
+--     primary key (id)
+-- );
+-- create table order_detail
+-- (
+--     id         bigint auto_increment,
+--     order_id   bigint not null,
+--     product_id bigint not null,
+--     quantity   bigint not null,
+--     primary key (id)
+-- );
+-- create table orders
+-- (
+--     id           bigint auto_increment,
+--     total_price  bigint not null,
+--     user_id      bigint not null,
+--     order_status varchar(255) check (order_status in ('COMPLETED', 'CANCELED', 'PAYMENT_WAITING', 'DELIVERY_WAITING')),
+--     primary key (id)
+-- );
+-- create table product
+-- (
+--     id                  bigint auto_increment,
+--     product_price       bigint       not null,
+--     product_stock_left  bigint       not null,
+--     store_id            bigint       not null,
+--     product_category    varchar(255) not null,
+--     product_name        varchar(255) not null,
+--     product_description text not null,
+--     primary key (id)
+-- );
+-- create table store
+-- (
+--     id            bigint auto_increment,
+--     store_account bigint not null,
+--     store_revenue bigint,
+--     user_id       bigint,
+--     primary key (id)
+-- );
+-- create table users
+-- (
+--     id            bigint auto_increment,
+--     user_balance  bigint       not null,
+--     user_name     varchar(255) not null,
+--     user_password varchar(255) not null,
+--     user_role     varchar(255) not null check (user_role in ('USER', 'SELLER')),
+--     primary key (id)
+-- );

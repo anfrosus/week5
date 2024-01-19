@@ -7,14 +7,14 @@ import jakarta.persistence.*
 @Table(name = "STORE")
 class Store(
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     var user: User,
 
     @Column(name = "STORE_ACCOUNT", nullable = false)
     var account: Long,
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     var productList: MutableList<Product> = mutableListOf(),
 
     @Column(name = "STORE_REVENUE")

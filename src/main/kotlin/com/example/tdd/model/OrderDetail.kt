@@ -7,11 +7,11 @@ import jakarta.persistence.*
 @Table(name = "ORDER_DETAIL")
 class OrderDetail(
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID", nullable = false)
     var order: Order,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID", nullable = false)
     var product: Product,
 

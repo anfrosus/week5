@@ -1,10 +1,14 @@
 package com.example.tdd.service
 
 import com.example.tdd.dto.request.ProductRequestDto
+import com.example.tdd.dto.response.ProductResponseDto
 import com.example.tdd.model.User
 import com.example.tdd.model.seller.Product
 import com.example.tdd.model.seller.Store
+import com.example.tdd.model.seller.toResponse
+import com.example.tdd.repository.ProductRepository
 import com.example.tdd.repository.StoreRepository
+import com.example.tdd.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,20 +20,20 @@ class ProductService(
     private val userRepository: UserRepository
 ) {
     @Transactional
-    fun createProduct(userId: Long, productRequestDto: ProductRequestDto) : ProductResponseDto{
+    fun createProduct(userId: Long, productRequestDto: ProductRequestDto): ProductResponseDto {
         //유저가 판매자인건 컨트롤러에서 검증
         val user: User = userRepository.findByIdOrNull(userId)
-            ?: throw CustomException("존재하지 않는 userId 입니다.")
+            ?: throw Exception("존재하지 않는 userId 입니다.")
 
         user.checkSellerOrThrow()
 
         val store: Store = storeRepository.findByIdOrNull(productRequestDto.storeId)
-            ?: throw CustomException("존재하지 않는 storeId 입니다.")
+            ?: throw Exception("존재하지 않는 storeId 입니다.")
 
         //상점을 개설했다면 상품등록가능
         val newProduct: Product = buildProduct(store, productRequestDto)
 
-        return productRepository.save(product).toResponse()
+        return productRepository.save(newProduct).toResponse()
     }
 
     private fun buildProduct(store: Store, productRequestDto: ProductRequestDto): Product {

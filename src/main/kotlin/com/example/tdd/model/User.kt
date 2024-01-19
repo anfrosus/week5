@@ -10,7 +10,7 @@ class User(
     @Column(name = "USER_NAME", nullable = false)
     var userName: String,
 
-    @Column(name = "user_role", nullable = false)
+    @Column(name = "user_PASSWORD", nullable = false)
     var password: String,
 
     @Enumerated(value = EnumType.STRING)
@@ -39,9 +39,10 @@ class User(
         }
     }
 
-    fun checkBalance(totalPrice: Long) {
+    fun reduceBalance(totalPrice: Long) {
         if (totalPrice > balance) {
             throw Exception("잔액이 부족합니다.")
         }
+        balance -= totalPrice
     }
 }

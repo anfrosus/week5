@@ -26,6 +26,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+//    runtimeOnly("com.h2database:h2")
+
+
     //jwt
     implementation("io.jsonwebtoken:jjwt-api:0.12.3")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.3")
@@ -33,6 +36,12 @@ dependencies {
 
     testImplementation("com.ninja-squad:springmockk:4.0.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+
+    //testContainer
+    testImplementation("org.testcontainers:testcontainers:1.18.3")  // TC 의존성
+    testImplementation("org.testcontainers:mysql:1.19.3")  // MySQL 테스트 컨테이너 사용
+    testImplementation("org.testcontainers:junit-jupiter:1.16.3")  // TC 의존성
+    testImplementation("com.mysql:mysql-connector-j:8.2.0")
 }
 
 tasks.withType<KotlinCompile> {
